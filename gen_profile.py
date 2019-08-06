@@ -14,7 +14,7 @@ def func(y,t,n):
 
 #for a given gamma, it generates normalized mass per unit length and density as a function of position. 
 def gen_interpolate(gamma):
-    n=1/(gamma-1)
+    n=1./(gamma-1)
     y0= [1,0] #[y(0), y'(0)], r=0 values
     t = np.arange(0,9,0.0001)
 
@@ -45,14 +45,14 @@ def profile(gamma,mu,delta):
     
     #find density at edge of stream for mu=mu, see md file for associated equation
     yRin = densfunc(mu) 
-    yRout = 1/delta 
+    yRout = 1./delta 
     alpha = yRin/yRout
     
     #differential equation
     y0= [1,0] #[y0, y'0]
     t = np.arange(0,9,0.0001)
     
-    n=1/(gamma-1)
+    n=1./(gamma-1)
     y = odeint(func,y0,t,args=(n,),mxstep=5000000)
     t=t[~np.isnan(y[:,0])]
     dat=y[:,0][~np.isnan(y[:,0])]
