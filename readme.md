@@ -1,3 +1,15 @@
+# README
+
+Requirement: python, numpy, scipy
+
+Run by ./gen_profile.py
+
+The parameters can be changed in line 95-97 of `gen_profile.py`. gamma is adiabatic index, mu is normalized mass per unit length, delta is density ratio of central axis to stream edge ($\delta_c$ in Aung+ 19). To save time, you may comment out line 99 of  `gen_profile.py` after you have runned the script at least once with the same gamma. The profile is generated as `profile_gamma*_mu*_delta*.txt`
+
+
+
+Some related equations for applying boundary condition at stream radius below. Open in markdown editors or copy and paste to latex to see equations.
+
 ### Solving for adiabatic cylinder, with a stream overdensity 
 
 $y_{in} = \lim_{r \to R^-}\rho(r)/\rho(0)$

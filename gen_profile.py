@@ -84,7 +84,7 @@ def profile(gamma,mu,delta):
     print "pressure at Rs: %.5f"%(P[ind])
     
     mask = r<30
-    f=open('test.txt','w')
+    f=open('profile_gamma%.2f_mu%.1f_delta%.1f.txt'%(gamma,mu,delta),'w')
     #f.write("#r/R_s dens/dens(0) pres/pres(0)\n")
     for i in range(len(r)):
         f.write("%.5e %.5e %.5e\n"%(r[i],dens[i],P[i]))
