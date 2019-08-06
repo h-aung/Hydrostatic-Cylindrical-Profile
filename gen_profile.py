@@ -93,7 +93,12 @@ def profile(gamma,mu,delta):
     
 def main():
     gamma = 5./3
+    mu = 0.1
+    delta = 100.
     #only need to run this once for every gamma
     gen_interpolate(gamma)
-    profile(gamma)
+    profile(gamma,mu,delta)
     return 
+    
+if __name__=="__main__":
+    main()
