@@ -2,7 +2,7 @@
 
 import numpy as np
 from scipy.interpolate import interp1d
-from scipy.integrate import quad
+from scipy.integrate import quad, odeint
 
 #differential equation, ostriker 1964, eq: 10
 def func(y,t,n):
@@ -36,9 +36,13 @@ def gen_interpolate(gamma):
     np.save('mpl_interpolate_%.2f.npy'%(gamma),[mu,dens,x])
     return
 
+#normalize the pressure to simulation box
+def pnorm(gamma,rstream,box_res):
+    return 4*np.pi*(gamma-1)/(gamma*rstream**2*box_res**2)
+
 #reload mpl values calculated, and find where stream should end
 #mu defined in Aung+ 19
-def profile(gamma,mu,delta):
+def profile(gamma,mu,delta,box_res):
     [mpl,dens,x] = np.load('mpl_interpolate_%.2f.npy'%(gamma))
     densfunc = interp1d(mpl, dens)
     xcutfunc = interp1d(mpl, x)
@@ -80,24 +84,26 @@ def profile(gamma,mu,delta):
     
     P = np.concatenate((densin**gamma,(alpha*densout[1:])**gamma))
     ind=r==1.0
-    pedge = P[ind][0]
-    print "pressure at Rs: %.5f"%(P[ind])
+    pcode = pnorm(gamma,rstream,box_res)
+    P = P*pcode
+    print "pressure at Rs: %.5e"%(P[ind])
     
     mask = r<30
     f=open('profile_gamma%.2f_mu%.1f_delta%.1f.txt'%(gamma,mu,delta),'w')
-    #f.write("#r/R_s dens/dens(0) pres/pres(0)\n")
+    #f.write("#r/R_s dens/dens(0) pres\n")
     for i in range(len(r)):
         f.write("%.5e %.5e %.5e\n"%(r[i],dens[i],P[i]))
     f.close()
     return
-    
+
 def main():
     gamma = 5./3
-    mu = 0.1
+    mu = 0.9
     delta = 100.
+    box_res = 32 #length of simulation box in radius of rstream
     #only need to run this once for every gamma
     gen_interpolate(gamma)
-    profile(gamma,mu,delta)
+    profile(gamma,mu,delta,box_res)
     return 
     
 if __name__=="__main__":
