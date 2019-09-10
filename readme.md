@@ -4,7 +4,7 @@ Requirement: python, numpy, scipy
 
 Run by ./gen_profile.py
 
-The parameters can be changed in line 95-97 of `gen_profile.py`. `gamma` is adiabatic index, `mu` is normalized mass per unit length, `delta` is density ratio of central axis to stream edge ($\delta_c$ in Aung+ 19), and `box_res` is the unit length of box in units of radius of stream ($1/R_s$ where $R_s$ is the value in namelist file as Rstream, the default in Aung+ 19 for `box_res` is 32). To save time, you may comment out line 105 of  `gen_profile.py` after you have runned the script at least once with the same gamma. The profile is generated as `profile_gamma*_mu*_delta*.txt`
+The parameters can be changed in line 100-103 of `gen_profile.py`. `gamma` is adiabatic index, `mu` is normalized mass per unit length, `delta` is density ratio of central axis to stream edge ($\delta_c$ in Aung+ 19), and `box_res` is the unit length of box in units of radius of stream ($1/R_s$ where $R_s$ is the value in namelist file as Rstream, the default in Aung+ 19 for `box_res` is 32). To save time, you may comment out line 105 of  `gen_profile.py` after you have runned the script at least once with the same gamma. The profile is generated as `profile_gamma*_mu*_delta*.txt`
 
 
 
